@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchBar from "./Components/SearchBar";
 import fetchAPI from "./fetchAPI/Fetch";
+import Header from './Components/Header/Header';
+
 
 function App() {
   const [searchedVideo, setSearchedVideo] = useState([]);
@@ -12,8 +14,8 @@ function App() {
     handleUserInput();
   }, [userInput]); // idk about this yet
 
-  async function handleUserInput(event) {
-    event.preventDefault();
+  async function handleUserInput() {
+    //event.preventDefault();
 
     try {
       let result = await fetchAPI({
@@ -33,8 +35,9 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Header />
         <Routes>
-          <Route path="/">Home</Route>
+          <Route path="/"> Home</Route>
           <Route
             path="/videos"
             element={<SearchBar searchedVideo={searchedVideo} />}
