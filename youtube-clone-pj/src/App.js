@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchBar from "./Components/SearchBar";
 import fetchAPI from "./fetchAPI/Fetch";
 import Header from './Components/Header/Header';
-
+import Home from './Components/Home';
 
 function App() {
   const [searchedVideo, setSearchedVideo] = useState([]);
@@ -14,8 +14,8 @@ function App() {
     handleUserInput();
   }, [userInput]); // idk about this yet
 
-  async function handleUserInput() {
-    //event.preventDefault();
+  async function handleUserInput(event) {
+    event.preventDefault();
 
     try {
       let result = await fetchAPI({
@@ -37,7 +37,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/"> Home</Route>
+          <Route path="/" element={<Home userInput={userInput} handleTextChange={handleTextChange} handleUserInput={handleUserInput}/>} />
           <Route
             path="/videos"
             element={<SearchBar searchedVideo={searchedVideo} />}
