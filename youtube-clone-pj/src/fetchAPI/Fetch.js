@@ -2,16 +2,12 @@ import axios from "axios";
 
 /* FETCH DATA USING API KEY */
 
-async function fetchData(data) {
+async function fetchData(userInput) {
   try {
-    let resource = data.resource ? data.resource : "";
-    let configObj = {
-      url: `https://youtube.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_API_KEY}${resource}`,
-      ...data,
-    };
-
-    let result = await axios(configObj);
-    return result;
+    let results = await axios.get(
+      `https://youtube.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_API_KEY}&part=snippet&q=${userInput}&maxResults=20&order=viewCount`
+    );
+    return results.data;
   } catch (error) {
     console.log(error);
   }

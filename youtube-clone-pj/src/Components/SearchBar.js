@@ -1,4 +1,5 @@
 import React from "react";
+import Video from "./Videos/Video";
 
 function SearchBar({ searchedVideo }) {
   return (
@@ -14,7 +15,7 @@ function SearchBar({ searchedVideo }) {
                   className="video"
                   key={video.id.videoId || video.id.channelId}
                 >
-                  <p>This is where the video component would go.</p>
+                  <Video video={video} />
                 </div>
               );
             })

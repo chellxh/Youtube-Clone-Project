@@ -1,29 +1,27 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchBar from "./Components/SearchBar";
 import fetchAPI from "./fetchAPI/Fetch";
-import Header from './Components/Header/Header';
-import Home from './Components/Home';
+import Header from "./Components/Header/Header";
+import Home from "./Components/Home";
+import Video from "./Components/Videos/Video";
 
 function App() {
   const [searchedVideo, setSearchedVideo] = useState([]);
   const [userInput, setUserInput] = useState("");
 
-  useEffect(() => {
-    handleUserInput();
-  }, [userInput]); // idk about this yet
+  // useEffect(() => {
+  //   handleUserInput();
+  // }, [userInput]); // idk about this yet
 
   async function handleUserInput(event) {
     event.preventDefault();
-
     try {
-      let result = await fetchAPI({
-        method: "get",
-        resource: `&part=snippet&q=${userInput}&maxResults=20&order=viewCount`,
-      });
+      let data = await fetchAPI(userInput);
+      console.log(data.items);
       setUserInput("");
-      setSearchedVideo(result.items);
+      setSearchedVideo(data.items);
     } catch (e) {
       console.log(e);
     }
@@ -37,12 +35,21 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home userInput={userInput} handleTextChange={handleTextChange} handleUserInput={handleUserInput}/>} />
           <Route
-            path="/videos"
+            path="/"
+            element={
+              <Home
+                userInput={userInput}
+                handleTextChange={handleTextChange}
+                handleUserInput={handleUserInput}
+              />
+            }
+          />
+          <Route
+            path="/"
             element={<SearchBar searchedVideo={searchedVideo} />}
           />
-          <Route path="/video/:id">VideoByID</Route>
+          <Route path="/video/:id" element={<Video />} />
         </Routes>
       </Router>
     </div>
