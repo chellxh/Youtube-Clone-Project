@@ -1,20 +1,17 @@
 .video {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr;
   margin: 40px;
-}
-.videoWrapper {
-  grid-area: 1 / 1 / 2 / 2;
+  align-items: center;
 }
 
-.relatedVids {
-  border: 2px solid red;
-  grid-area: 1 / 2 / 2 / 3;
-  margin: 20px;
+.comments {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.relatedVids > p {
-  margin-top: 5px;
-  text-align: center;
-  text-decoration: underline;
+
+ul {
+  list-style: none;
+}
+
+.commenterName {
+  font-size: large;
+  font-weight: bold;
 }

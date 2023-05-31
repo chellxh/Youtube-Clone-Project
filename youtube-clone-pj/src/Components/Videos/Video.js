@@ -1,8 +1,7 @@
 import Youtube from "react-youtube";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import fetchData from "./../../fetchAPI/Fetch";
-import RelatedVideos from "./RelatedVideos";
+import fetchData from "../../fetchAPI/Fetch";
 import { v4 as generateId } from "uuid";
 import "./Video.css";
 
@@ -16,8 +15,8 @@ function Video() {
   const [comments, setComments] = useState([]);
 
   const opts = {
-    height: "390",
-    width: "640",
+    height: "600",
+    width: "920",
     playerVars: {
       autoplay: 1,
     },
@@ -27,12 +26,11 @@ function Video() {
     try {
       let results = fetchData({
         method: "get",
-        url: `https://www.googleapis.com/youtube/v3/videos?key=${process.env.REACT_APP_API_KEY}&id=${id}&part=snippet,player`,
+        url: `https://www.googleapis.com/youtube/v3/videos?key=${process.env.REACT_APP_YOUTUBE_KEY}&id=${id}&part=snippet,player`,
       });
-      console.log(results.data.items[0]);
-      setVideo(results.data.items[0]);
-    } catch (error) {
-      console.log(error);
+      setVideo(results.items[0]);
+    } catch (e) {
+      console.log(e);
     }
   }, [id]);
 
@@ -42,12 +40,11 @@ function Video() {
 
   function handleComment(event) {
     event.preventDefault();
-
-    setComments([...comments, comment]);
     setComment({
       name: "",
       comment: "",
     });
+    setComments([...comments, comment]);
   }
 
   return (
@@ -55,28 +52,25 @@ function Video() {
       <div className="videoWrapper">
         <h2>{video?.snippet?.title}</h2>
         <Youtube videoId={id} opts={opts} />
+        <hr />
         <div className="videoComments">
           <h4>Add a Comment:</h4>
           <hr />
           <form onSubmit={handleComment}>
             <label htmlFor="name">
-              Name:
+              <strong>Name:</strong>
               <br />
               <input type="text" id="name" onChange={handleTextChange} />
             </label>
             <br />
             <label htmlFor="comment">
-              Comment:
+              <strong>Comment:</strong>
               <br />
               <input type="text" id="comment" onChange={handleTextChange} />
             </label>
             <br />
-            <button
-              type="submit"
-              onClick={handleComment}
-              className="btn btn-danger"
-            >
-              Send
+            <button type="submit" className="btn btn-danger">
+              Add Comment
             </button>
           </form>
           <hr />
@@ -84,8 +78,10 @@ function Video() {
           <ul>
             {comments.map((commenter) => {
               return (
-                <li key={generateId()}>
-                  {commenter.name}:{commenter.comment}
+                <li className="comments" key={generateId()}>
+                  <span className="commenterName">{commenter.name}</span>
+                  <br />
+                  {commenter.comment}
                 </li>
               );
             })}
@@ -93,10 +89,6 @@ function Video() {
         </div>
       </div>
       <hr />
-      <div className="relatedVids">
-        <p>Related Videos</p>
-        <RelatedVideos />
-      </div>
     </div>
   );
 }
