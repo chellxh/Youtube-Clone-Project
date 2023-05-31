@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import fetchData from "../../fetchAPI/Fetch";
 
 function RelatedVideos() {
   let { id } = useParams();
@@ -9,17 +10,17 @@ function RelatedVideos() {
 
   useEffect(() => {
     try {
-      let results = axios.get(
-        `https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_YOUTUBE_KEY}&id=${id}&relatedToVideoId=${id}&type=video&part=snippet,player`
-      );
-
+      let results = fetchData({
+        method: "get",
+        url: `https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_API_KEY}&relatedToVideoId=${id}&type=video&part=snippet`,
+      });
       setRelatedVideos(results.data.items);
     } catch (e) {
       console.log(e);
     }
   }, [id]);
   return (
-    <div>
+    <div className="relatedVideos">
       {relatedVideos?.length > 0 &&
         relatedVideos.map((video) => {
           return (

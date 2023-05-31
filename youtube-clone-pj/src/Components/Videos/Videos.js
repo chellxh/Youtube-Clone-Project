@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
+import Avatar from "@mui/material/Avatar/Avatar";
+import "./Videos.css";
 
 function Videos({ video }) {
   return (
     <div className="videoPost">
-      <Link to={`/videos/${video.id.videoId}`}>
+      <Link to={`/video/${video.id.videoId}`}>
         <img
           className="videoPostThumbnail"
           alt={video.snippet.title}
@@ -18,7 +19,7 @@ function Videos({ video }) {
             src={video.snippet.thumbnails.medium.url}
           />
           <div className="videoPostText">
-            <h4>{video.snippet.title}</h4>
+            <h5>{video.snippet.title}</h5>
             <p>{video.channelTitle}</p>
           </div>
         </div>
