@@ -11,7 +11,7 @@ export const Aboutinfo = [
         id: "456",
         name: "Thandi Bristol",
         quote: "Trust the process",
-        description: "Thandi, who is also new to coding, loves to cook and bake. She also loves nature, old buildings, and music, and hopes to work for start-up tech company. Thandi did the styling of the page and the about and home component using react.js and bootstrap.css.",
+        description: "Thandi, who is also new to coding, loves to cook and bake. She also loves nature, old buildings, and music, and hopes to work for start-up tech company. Thandi created the about and home component using react.js and bootstrap.css.",
         photo: "Thandi Bristal 2.jpg",
         github: "https://github.com/Thandisb",
      }
