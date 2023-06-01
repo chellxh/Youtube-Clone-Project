@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Videos from "../Videos/Videos";
 import fetchData from "../../fetchAPI/Fetch";
-import "./../Components/Home.css";
+import "./Home.css";
 function Home() {
   const [userInput, setUserInput] = useState("");
   const [searchedVideo, setSearchedVideo] = useState([]);
