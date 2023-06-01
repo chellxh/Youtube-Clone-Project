@@ -1,8 +1,9 @@
 import Youtube from "react-youtube";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import fetchData from "../../fetchAPI/Fetch";
 import { v4 as generateId } from "uuid";
+import Share from "./Share/Share";
 import "./Video.css";
 
 function Video() {
@@ -21,6 +22,8 @@ function Video() {
       autoplay: 1,
     },
   };
+
+  let url = `/video/${id}`;
 
   useEffect(() => {
     try {
@@ -52,6 +55,7 @@ function Video() {
       <div className="videoWrapper">
         <h2>{video?.snippet?.title}</h2>
         <Youtube videoId={id} opts={opts} />
+        <Share copyText={url} />
         <hr />
         <div className="videoComments">
           <h4>Add a Comment:</h4>
