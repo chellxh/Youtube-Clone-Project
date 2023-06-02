@@ -23,7 +23,7 @@ function Video() {
     },
   };
 
-  let url = `/video/${id}`;
+  let url = `https://cozy-mousse-e3cc50.netlify.app//video/${id}`;
 
   useEffect(() => {
     try {
