@@ -1,0 +1,17 @@
+.video {
+  margin: 40px;
+  align-items: center;
+}
+
+.comments {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+.commenterName {
+  font-size: large;
+  font-weight: bold;
+}
