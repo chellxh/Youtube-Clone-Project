@@ -19,7 +19,7 @@ export default function Aboutcard({developer}) {
         <div className='card text-bg-secondary mb-3' >
             <div className='row g-0'>
                 <div className='col md-4'>
-                <img src={developer.photo} className='img-fluid rounded-start'/>
+                <img src={developer.photo} alt="developer's headshot" className='img-fluid rounded-start'/>
                 </div>
           <div className='col-md-8'>  
             <div className='card-body'>    
